@@ -5,6 +5,19 @@
 
 #include "ui.h"
 
+void updateTime(char time[]){
+    lv_label_set_text(ui_Time, time);
+}
+
+void updateWeekdayDateMonth(char weekdayDateMonth[]){
+    lv_label_set_text(ui_WeekdayDateMonth, weekdayDateMonth);
+}
+
+void updateHumidity(char humidity[]){
+    lv_label_set_text(ui_HumidityPercent, humidity);
+}
+
+
 void ui_TimeHumidity_screen_init(void)
 {
     ui_TimeHumidity = lv_obj_create(NULL);
@@ -22,7 +35,7 @@ void ui_TimeHumidity_screen_init(void)
     lv_obj_set_width(ui_Time, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Time, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Time, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Time, "09:25");
+    updateTime("09:25");
     lv_obj_set_style_text_font(ui_Time, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeekdayDateMonth = lv_label_create(ui_TimeHumidity);
@@ -31,7 +44,7 @@ void ui_TimeHumidity_screen_init(void)
     lv_obj_set_x(ui_WeekdayDateMonth, 0);
     lv_obj_set_y(ui_WeekdayDateMonth, 47);
     lv_obj_set_align(ui_WeekdayDateMonth, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeekdayDateMonth, "Mon 28 Oct");
+    updateWeekdayDateMonth("Mon 28 Oct");
     lv_obj_set_style_text_font(ui_WeekdayDateMonth, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Humidity = lv_obj_create(ui_TimeHumidity);
@@ -59,7 +72,7 @@ void ui_TimeHumidity_screen_init(void)
     lv_obj_set_x(ui_HumidityPercent, 4);
     lv_obj_set_y(ui_HumidityPercent, 22);
     lv_obj_set_align(ui_HumidityPercent, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_HumidityPercent, "63%");
+    updateHumidity("63%");
     lv_obj_set_style_text_font(ui_HumidityPercent, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_TimeHumidity, ui_event_TimeHumidity, LV_EVENT_ALL, NULL);

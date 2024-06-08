@@ -65,8 +65,9 @@ LV_IMG_DECLARE(ui_img_weather_1_png);    // assets/weather_1.png
 
 
 
-
-
+void updateTime(char time[]);
+void updateWeekdayDateMonth(char weekdayDateMonth[]);
+void updateHumidity(char humidity[]);
 void ui_init(void);
 
 #ifdef __cplusplus

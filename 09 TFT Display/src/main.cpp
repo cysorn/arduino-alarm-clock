@@ -37,6 +37,7 @@ void setup()
 void loop()
 {
   lv_timer_handler();
+  //lv_timer_create(updateTime, 1000);
   delay(5);
 /*
   char hour[2];
