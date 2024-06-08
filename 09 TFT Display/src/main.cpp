@@ -33,9 +33,48 @@ void setup()
   ui_init();  
 
 }
+#include "ui/ui.h"
+#include <ctime>
+
+
+void extractAndPrintCompileTime()
+{
+  const char* compileTime = __TIME__;
+
+  // Extract hour (assumes HH:MM:SS format)
+  int hour = (compileTime[0] - '0') * 10 + (compileTime[1] - '0');
+
+  // Extract minute
+  int minute = (compileTime[3] - '0') * 10 + (compileTime[4] - '0');
+
+
+  Serial.print("Compiled Time: ");
+  Serial.print(hour);
+  Serial.print(":");
+  Serial.println(minute);
+}
+
+void hoursAndMinsPassSinceClockStart(){
+  
+  unsigned long currentMillis = millis();
+
+  // Calculate seconds since midnight
+  unsigned long seconds = currentMillis / 1000;
+
+  // Extract hour (0-23) and minute (0-59)
+  int hour = seconds / 3600;
+  int minute = (seconds % 3600) / 60;
+
+  Serial.print("Current Time: ");
+  Serial.print(hour);
+  Serial.print(":");
+  Serial.println(minute);
+}
+
 
 void timer_callback(lv_timer_t * timer) {
     updateTime();  // Call your updateTime function here
+
 }
 
 void loop()

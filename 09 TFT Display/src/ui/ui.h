@@ -44,6 +44,12 @@ extern lv_obj_t * ui_Humidity;
 extern lv_obj_t * ui_Drop;
 extern lv_obj_t * ui_HumidityPercent;
 
+extern char timeClock[];
+extern char weekdayDateMonth[];
+extern char humidity[];
+
+
+
 // SCREEN: ui_Alarm
 void ui_Alarm_screen_init(void);
 void ui_event_Alarm(lv_event_t * e);
