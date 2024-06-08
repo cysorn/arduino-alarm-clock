@@ -5,7 +5,8 @@
 
 #include "ui.h"
 #include "ui_helpers.h"
-#include "time_getter.h"
+#include <lvgl.h>
+#include <Arduino.h>
 
 ///////////////////// VARIABLES ////////////////////
 void Appear_Animation(lv_obj_t * TargetObject, int delay);
@@ -158,24 +159,15 @@ void ui_init(void)
 
 //
 
-char timeClock[] = "09:25";
+char timeClock[] = "00:00";
 char weekdayDateMonth[] = "Mon 28 Oct";
 char humidity[] = "63%";
 
 const char* compileTime = __TIME__;
 
-/*
-void updateTime(){
-    uint8_t hh = conv2d(__TIME__), mm = conv2d(__TIME__ + 3), ss = conv2d(__TIME__ + 6); // Get H, M, S from compile time
-    lv_label_set_text(ui_Time, timeClock);
-}
-*/
-
 void updateTimeClockVariable()
 {
-  //uint8_t hh = conv2d(__TIME__), mm = conv2d(__TIME__ + 3), ss = conv2d(__TIME__ + 6); // Get H, M, S from compile time
-
-  // Extract hour (assumes HH:MM:SS format)
+  // Extract hour
   int compilationTimeHours = (compileTime[0] - '0') * 10 + (compileTime[1] - '0');
 
   // Extract minute
@@ -184,11 +176,8 @@ void updateTimeClockVariable()
   // Extract seconds
   int compilationTimeSeconds = (compileTime[6] - '0') * 10 + (compileTime[7] - '0');
 
-  //Time since midnight
+  //Seconds since midnight of compilation day
   unsigned long secondsSinceCompilationDayMidnight = millis() / 1000 + compilationTimeMinutes * 60 + compilationTimeHours * 3600;
-
-  // Extract hour (0-23) and minute (0-59)
-  //int minute = (secondsRunning % 3600) / 60;
 
   int minuteRaw = secondsSinceCompilationDayMidnight / 60;
   int minute = minuteRaw % 60;
@@ -199,25 +188,10 @@ void updateTimeClockVariable()
 
 }
 
-
-
 void updateTime() {
-    //char timeClock[8]; // Allocate enough space for "hh:mm\0" (null terminator)
-
-    //uint8_t hh = conv2d(__TIME__);
-    //uint8_t mm = conv2d(__TIME__ + 3);
-
-    // Format the time string using sprintf
-    //int chars_written = snprintf(timeClock, sizeof(timeClock), "%02d:%02d", hh, mm);
 
     updateTimeClockVariable();
-    /*
-    // Check for potential snprintf errors (optional)
-    if (chars_written < 0 || chars_written >= sizeof(timeClock)) {
-        // Handle error, e.g., set a default string in timeClock
-    }
-    */
-
+    
     lv_label_set_text(ui_Time, timeClock);
     lv_obj_invalidate(ui_Time);
 }

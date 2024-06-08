@@ -5,35 +5,6 @@
 
 #include "ui.h"
 
-/*
-uint8_t conv2d(const char* p) {
-  uint8_t v = 0;
-  if ('0' <= *p && *p <= '9')
-    v = *p - '0';
-  return 10 * v + *++p - '0';
-}
-*/
-
-/*
-
-char timeClock[] = "09:25";
-char weekdayDateMonth[] = "Mon 28 Oct";
-char humidity[] = "63%";
-
-void updateTime(){
-    uint8_t hh = conv2d(__TIME__), mm = conv2d(__TIME__ + 3), ss = conv2d(__TIME__ + 6); // Get H, M, S from compile time
-    lv_label_set_text(ui_Time, timeClock);
-}
-
-void updateWeekdayDateMonth(){
-    lv_label_set_text(ui_WeekdayDateMonth, weekdayDateMonth);
-}
-
-void updateHumidity(){
-    lv_label_set_text(ui_HumidityPercent, humidity);
-}
-*/
-
 void ui_TimeHumidity_screen_init(void)
 {
     ui_TimeHumidity = lv_obj_create(NULL);
