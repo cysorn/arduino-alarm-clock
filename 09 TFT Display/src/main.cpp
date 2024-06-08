@@ -4,6 +4,8 @@
 #include "display.h"
 #include "ui/ui.h"
 
+
+
 static uint8_t conv2d(const char* p); // Forward declaration needed for IDE 1.6.x
 // Function to extract numbers from compile time string
 static uint8_t conv2d(const char* p) {
@@ -35,17 +37,15 @@ void setup()
 void loop()
 {
   lv_timer_handler();
-  
-
+  delay(5);
+/*
   char hour[2];
   char min[2]; 
   itoa(hh+th++, hour, 10);
   itoa(mm+tm++, min, 10);
 
-  updateTime(hour, min);
-
   delay(1000);
-
+*/
 /*
   Serial.print(hh);
   Serial.print(" ");

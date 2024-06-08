@@ -1,18 +1,12 @@
-SET(SOURCES components/ui_comp_alarm_comp.c
-    components/ui_comp_clock_dot.c
-    components/ui_comp_scrolldots.c
-    components/ui_comp_small_label.c
-    components/ui_comp.c
-    screens/ui_Splash.c
-    screens/ui_Clock.c
-    screens/ui_Alarm.c
+SET(SOURCES ui_Splash.c
+    ui_TimeHumidity.c
+    ui_Alarm.c
     ui.c
-    components/ui_comp_hook.c
+    ui_comp_hook.c
     ui_helpers.c
-    ui_events.cpp
-    images/ui_img_white_moved_sandclock_to_the_right_80_png.c
-    images/ui_img_fon_png.c
-    images/ui_img_weather_1_png.c
-    fonts/ui_font_Number.c)
+    ui_events.c
+    ui_img_logo_png.c
+    ui_img_1_png.c
+    ui_img_weather_1_png.c)
 
 add_library(ui ${SOURCES})
