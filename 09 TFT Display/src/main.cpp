@@ -22,17 +22,9 @@ uint8_t hh = conv2d(__TIME__), mm = conv2d(__TIME__ + 3), ss = conv2d(__TIME__ +
   int th = 0;
   int tm = 0;
 
-void setup()
-{
 
- 
-  Serial.begin( 9600 ); 
 
-  lcdInit();
-  lvglInit();
-  ui_init();  
 
-}
 #include "ui/ui.h"
 #include <ctime>
 
@@ -71,17 +63,95 @@ void hoursAndMinsPassSinceClockStart(){
   Serial.println(minute);
 }
 
-
+/*
 void timer_callback(lv_timer_t * timer) {
     updateTime();  // Call your updateTime function here
 
 }
 
+//lv_timer_t
+lv_timer_t *tma;
+*/
+
+void setup()
+{
+
+ 
+  Serial.begin( 9600 ); 
+
+  lcdInit();
+  lvglInit();
+  ui_init();
+
+}
+
+/*
+void updateTimeClockVariableAAA()
+{
+  char timeClock[] = "09:25";
+  char weekdayDateMonth[] = "Mon 28 Oct";
+  char humidity[] = "63%";
+
+  const char* compileTime = __TIME__;
+
+  //uint8_t hh = conv2d(__TIME__), mm = conv2d(__TIME__ + 3), ss = conv2d(__TIME__ + 6); // Get H, M, S from compile time
+
+  // Extract hour (assumes HH:MM:SS format)
+  int compilationTimeHours = (compileTime[0] - '0') * 10 + (compileTime[1] - '0');
+
+  // Extract minute
+  int compilationTimeMinutes = (compileTime[3] - '0') * 10 + (compileTime[4] - '0');
+
+  // Extract seconds
+  int compilationTimeSeconds = (compileTime[6] - '0') * 10 + (compileTime[7] - '0');
+
+  //Time since midnight
+  unsigned long secondsSinceCompilationDayMidnight = millis() / 1000 + compilationTimeMinutes * 60 + compilationTimeHours * 3600;
+
+  // Extract hour (0-23) and minute (0-59)
+  //int minute = (secondsRunning % 3600) / 60;
+
+  int minuteRaw = secondsSinceCompilationDayMidnight / 60;
+  int minute = minuteRaw % 60;
+  int hour = (minuteRaw / 60) % 24;
+
+  //chars_written is the count of written chars
+  int chars_written = snprintf(timeClock, sizeof(timeClock), "%02d:%02d", hour, minute);
+
+  Serial.print("Compilation: Hours ");
+  Serial.println(compilationTimeHours);
+
+  Serial.print("Compilation: Minutes ");
+  Serial.println(compilationTimeMinutes);
+
+  Serial.print("Compilation: Seconds ");
+  Serial.println(compilationTimeSeconds);
+  //--------------------
+
+  Serial.print("Minute ");
+  Serial.println(minute);
+
+  Serial.print("Hour ");
+  Serial.println(hour);
+
+  //--------------------
+
+  Serial.print("SecondsinceCompilation");
+  Serial.println(secondsSinceCompilationDayMidnight);
+
+  Serial.println();
+  Serial.println();
+  Serial.println();
+  Serial.println();
+  Serial.println();
+}
+*/
+
 void loop()
 {
   lv_timer_handler();
-  lv_timer_create(timer_callback, 1000, NULL);
-  delay(5);
+  updateTime();
+  delay(20);
 /*
   char hour[2];
   char min[2]; 
