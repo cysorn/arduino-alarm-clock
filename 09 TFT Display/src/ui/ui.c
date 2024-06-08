@@ -5,6 +5,7 @@
 
 #include "ui.h"
 #include "ui_helpers.h"
+#include "time_getter.h"
 
 ///////////////////// VARIABLES ////////////////////
 void Appear_Animation(lv_obj_t * TargetObject, int delay);
@@ -29,6 +30,7 @@ lv_obj_t * ui_WeekdayDateMonth;
 lv_obj_t * ui_Humidity;
 lv_obj_t * ui_Drop;
 lv_obj_t * ui_HumidityPercent;
+
 
 
 // SCREEN: ui_Alarm
@@ -150,4 +152,44 @@ void ui_init(void)
     ui_Alarm_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Splash);
+}
+
+
+
+//
+
+char timeClock[] = "09:25";
+char weekdayDateMonth[] = "Mon 28 Oct";
+char humidity[] = "63%";
+
+/*
+void updateTime(){
+    uint8_t hh = conv2d(__TIME__), mm = conv2d(__TIME__ + 3), ss = conv2d(__TIME__ + 6); // Get H, M, S from compile time
+    lv_label_set_text(ui_Time, timeClock);
+}
+*/
+
+void updateTime() {
+    //char timeClock[8]; // Allocate enough space for "hh:mm\0" (null terminator)
+
+    uint8_t hh = conv2d(__TIME__);
+    uint8_t mm = conv2d(__TIME__ + 3);
+
+    // Format the time string using sprintf
+    int chars_written = snprintf(timeClock, sizeof(timeClock), "%02d:%02d", hh, mm);
+
+    // Check for potential snprintf errors (optional)
+    if (chars_written < 0 || chars_written >= sizeof(timeClock)) {
+        // Handle error, e.g., set a default string in timeClock
+    }
+
+    lv_label_set_text(ui_Time, timeClock);
+}
+
+void updateWeekdayDateMonth(){
+    lv_label_set_text(ui_WeekdayDateMonth, weekdayDateMonth);
+}
+
+void updateHumidity(){
+    lv_label_set_text(ui_HumidityPercent, humidity);
 }

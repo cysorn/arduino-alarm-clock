@@ -43,6 +43,7 @@ extern lv_obj_t * ui_WeekdayDateMonth;
 extern lv_obj_t * ui_Humidity;
 extern lv_obj_t * ui_Drop;
 extern lv_obj_t * ui_HumidityPercent;
+
 // SCREEN: ui_Alarm
 void ui_Alarm_screen_init(void);
 void ui_event_Alarm(lv_event_t * e);
@@ -65,9 +66,9 @@ LV_IMG_DECLARE(ui_img_weather_1_png);    // assets/weather_1.png
 
 
 
-void updateTime(char time[]);
-void updateWeekdayDateMonth(char weekdayDateMonth[]);
-void updateHumidity(char humidity[]);
+void updateTime();
+void updateWeekdayDateMonth();
+void updateHumidity();
 void ui_init(void);
 
 #ifdef __cplusplus

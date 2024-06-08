@@ -5,18 +5,34 @@
 
 #include "ui.h"
 
-void updateTime(char time[]){
-    lv_label_set_text(ui_Time, time);
+/*
+uint8_t conv2d(const char* p) {
+  uint8_t v = 0;
+  if ('0' <= *p && *p <= '9')
+    v = *p - '0';
+  return 10 * v + *++p - '0';
+}
+*/
+
+/*
+
+char timeClock[] = "09:25";
+char weekdayDateMonth[] = "Mon 28 Oct";
+char humidity[] = "63%";
+
+void updateTime(){
+    uint8_t hh = conv2d(__TIME__), mm = conv2d(__TIME__ + 3), ss = conv2d(__TIME__ + 6); // Get H, M, S from compile time
+    lv_label_set_text(ui_Time, timeClock);
 }
 
-void updateWeekdayDateMonth(char weekdayDateMonth[]){
+void updateWeekdayDateMonth(){
     lv_label_set_text(ui_WeekdayDateMonth, weekdayDateMonth);
 }
 
-void updateHumidity(char humidity[]){
+void updateHumidity(){
     lv_label_set_text(ui_HumidityPercent, humidity);
 }
-
+*/
 
 void ui_TimeHumidity_screen_init(void)
 {
@@ -35,7 +51,7 @@ void ui_TimeHumidity_screen_init(void)
     lv_obj_set_width(ui_Time, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Time, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Time, LV_ALIGN_CENTER);
-    updateTime("09:25");
+    updateTime();
     lv_obj_set_style_text_font(ui_Time, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeekdayDateMonth = lv_label_create(ui_TimeHumidity);
@@ -44,7 +60,7 @@ void ui_TimeHumidity_screen_init(void)
     lv_obj_set_x(ui_WeekdayDateMonth, 0);
     lv_obj_set_y(ui_WeekdayDateMonth, 47);
     lv_obj_set_align(ui_WeekdayDateMonth, LV_ALIGN_CENTER);
-    updateWeekdayDateMonth("Mon 28 Oct");
+    updateWeekdayDateMonth();
     lv_obj_set_style_text_font(ui_WeekdayDateMonth, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Humidity = lv_obj_create(ui_TimeHumidity);
@@ -72,7 +88,7 @@ void ui_TimeHumidity_screen_init(void)
     lv_obj_set_x(ui_HumidityPercent, 4);
     lv_obj_set_y(ui_HumidityPercent, 22);
     lv_obj_set_align(ui_HumidityPercent, LV_ALIGN_CENTER);
-    updateHumidity("63%");
+    updateHumidity();
     lv_obj_set_style_text_font(ui_HumidityPercent, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_TimeHumidity, ui_event_TimeHumidity, LV_EVENT_ALL, NULL);

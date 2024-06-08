@@ -34,10 +34,14 @@ void setup()
 
 }
 
+void timer_callback(lv_timer_t * timer) {
+    updateTime();  // Call your updateTime function here
+}
+
 void loop()
 {
   lv_timer_handler();
-  //lv_timer_create(updateTime, 1000);
+  lv_timer_create(timer_callback, 1000, NULL);
   delay(5);
 /*
   char hour[2];
