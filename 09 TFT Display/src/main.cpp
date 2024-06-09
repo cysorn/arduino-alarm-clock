@@ -21,5 +21,18 @@ void loop()
   
   lv_timer_handler();
   updateTime();
-  delay(5);
+ 
+
+  //char * selectedValue;
+  
+  //lv_roller_get_selected_str(ui_HourChooseRoller, selectedValue, 8);
+
+  if(ui_HourChooseRoller != NULL)
+  {
+    uint16_t buff = lv_roller_get_selected(ui_HourChooseRoller);
+    Serial.print("Selected Hour: ");
+    Serial.println(buff);
+  }
+
+   delay(5);
 }

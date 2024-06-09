@@ -5,8 +5,6 @@
 
 #include "ui.h"
 #include "ui_helpers.h"
-#include <lvgl.h>
-#include <Arduino.h>
 
 ///////////////////// VARIABLES ////////////////////
 void Appear_Animation(lv_obj_t * TargetObject, int delay);
@@ -21,17 +19,28 @@ lv_obj_t * ui_FETA;
 lv_obj_t * ui_FetaText;
 
 
+// SCREEN: ui_TimeSetup
+void ui_TimeSetup_screen_init(void);
+lv_obj_t * ui_TimeSetup;
+lv_obj_t * ui_Bckg4;
+lv_obj_t * ui_TimeSetupLabel;
+lv_obj_t * ui_TimeChoose;
+lv_obj_t * ui_HourChooseRoller;
+lv_obj_t * ui_ColonTimeChoose;
+lv_obj_t * ui_MinChooseRoller;
+void ui_event_CheckMark(lv_event_t * e);
+lv_obj_t * ui_CheckMark;
+
+
 // SCREEN: ui_TimeHumidity
 void ui_TimeHumidity_screen_init(void);
 void ui_event_TimeHumidity(lv_event_t * e);
 lv_obj_t * ui_TimeHumidity;
 lv_obj_t * ui_Bckg1;
 lv_obj_t * ui_Time;
-lv_obj_t * ui_WeekdayDateMonth;
 lv_obj_t * ui_Humidity;
 lv_obj_t * ui_Drop;
 lv_obj_t * ui_HumidityPercent;
-
 
 
 // SCREEN: ui_Alarm
@@ -47,8 +56,8 @@ lv_obj_t * ui_MinRoller;
 lv_obj_t * ui_EnableAlarm;
 lv_obj_t * ui_Snooze;
 lv_obj_t * ui____initial_actions0;
-const lv_img_dsc_t * ui_imgset_[1] = {&ui_img_1_png};
 const lv_img_dsc_t * ui_imgset_weather_[1] = {&ui_img_weather_1_png};
+const lv_img_dsc_t * ui_imgset_[1] = {&ui_img_1_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -111,14 +120,22 @@ void ui_event_Splash(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOADED) {
-        Appear_Animation(ui_Splash, 100);
-        _ui_screen_change(&ui_TimeHumidity, LV_SCR_LOAD_ANIM_FADE_ON, 200, 1400, &ui_TimeHumidity_screen_init);
+        Appear_Animation(ui_Logo, 100);
+        _ui_screen_change(&ui_TimeSetup, LV_SCR_LOAD_ANIM_FADE_ON, 200, 1400, &ui_TimeSetup_screen_init);
     }
     if(event_code == LV_EVENT_SCREEN_LOADED) {
         Appear_Animation(ui_FETA, 200);
     }
     if(event_code == LV_EVENT_SCREEN_LOADED) {
         Appear_Animation(ui_FetaText, 300);
+    }
+}
+void ui_event_CheckMark(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        _ui_screen_change(&ui_TimeHumidity, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_TimeHumidity_screen_init);
     }
 }
 void ui_event_TimeHumidity(lv_event_t * e)
@@ -149,6 +166,7 @@ void ui_init(void)
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     ui_Splash_screen_init();
+    ui_TimeSetup_screen_init();
     ui_TimeHumidity_screen_init();
     ui_Alarm_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
@@ -156,12 +174,9 @@ void ui_init(void)
 }
 
 
-
 //
 
 char timeClock[] = "00:00";
-char weekdayDateMonth[] = "Mon 28 Oct";
-char humidity[] = "63%";
 
 const char* compileTime = __TIME__;
 
@@ -194,12 +209,4 @@ void updateTime() {
     
     lv_label_set_text(ui_Time, timeClock);
     lv_obj_invalidate(ui_Time);
-}
-
-void updateWeekdayDateMonth(){
-    lv_label_set_text(ui_WeekdayDateMonth, weekdayDateMonth);
-}
-
-void updateHumidity(){
-    lv_label_set_text(ui_HumidityPercent, humidity);
 }

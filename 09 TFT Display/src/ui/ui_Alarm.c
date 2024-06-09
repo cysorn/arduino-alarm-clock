@@ -32,16 +32,17 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_width(ui_WeckerSetup, 308);
     lv_obj_set_height(ui_WeckerSetup, 123);
     lv_obj_set_x(ui_WeckerSetup, 1);
-    lv_obj_set_y(ui_WeckerSetup, 1);
+    lv_obj_set_y(ui_WeckerSetup, 11);
     lv_obj_set_align(ui_WeckerSetup, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_WeckerSetup, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_HourRoller = lv_roller_create(ui_WeckerSetup);
     lv_roller_set_options(ui_HourRoller,
-                          "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23", LV_ROLLER_MODE_NORMAL);
+                          "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+                          LV_ROLLER_MODE_NORMAL);
     lv_obj_set_height(ui_HourRoller, 100);
     lv_obj_set_width(ui_HourRoller, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_x(ui_HourRoller, -79);
+    lv_obj_set_x(ui_HourRoller, -85);
     lv_obj_set_y(ui_HourRoller, 0);
     lv_obj_set_align(ui_HourRoller, LV_ALIGN_CENTER);
     lv_obj_set_style_text_font(ui_HourRoller, &lv_font_montserrat_26, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -62,7 +63,7 @@ void ui_Alarm_screen_init(void)
     ui_Colon = lv_label_create(ui_WeckerSetup);
     lv_obj_set_width(ui_Colon, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Colon, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Colon, -29);
+    lv_obj_set_x(ui_Colon, -35);
     lv_obj_set_y(ui_Colon, 0);
     lv_obj_set_align(ui_Colon, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Colon, ":");
@@ -70,10 +71,11 @@ void ui_Alarm_screen_init(void)
 
     ui_MinRoller = lv_roller_create(ui_WeckerSetup);
     lv_roller_set_options(ui_MinRoller,
-                          "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23", LV_ROLLER_MODE_NORMAL);
+                          "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+                          LV_ROLLER_MODE_NORMAL);
     lv_obj_set_height(ui_MinRoller, 100);
     lv_obj_set_width(ui_MinRoller, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_x(ui_MinRoller, 22);
+    lv_obj_set_x(ui_MinRoller, 15);
     lv_obj_set_y(ui_MinRoller, 0);
     lv_obj_set_align(ui_MinRoller, LV_ALIGN_CENTER);
     lv_obj_set_style_text_font(ui_MinRoller, &lv_font_montserrat_26, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -94,8 +96,8 @@ void ui_Alarm_screen_init(void)
     ui_EnableAlarm = lv_switch_create(ui_WeckerSetup);
     lv_obj_set_width(ui_EnableAlarm, 50);
     lv_obj_set_height(ui_EnableAlarm, 25);
-    lv_obj_set_x(ui_EnableAlarm, 106);
-    lv_obj_set_y(ui_EnableAlarm, -23);
+    lv_obj_set_x(ui_EnableAlarm, 105);
+    lv_obj_set_y(ui_EnableAlarm, -20);
     lv_obj_set_align(ui_EnableAlarm, LV_ALIGN_CENTER);
 
     lv_obj_set_style_bg_color(ui_EnableAlarm, lv_color_hex(0xDFDFDF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
@@ -113,7 +115,7 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_width(ui_Snooze, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Snooze, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_Snooze, 109);
-    lv_obj_set_y(ui_Snooze, 16);
+    lv_obj_set_y(ui_Snooze, 27);
     lv_obj_set_align(ui_Snooze, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Snooze, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 

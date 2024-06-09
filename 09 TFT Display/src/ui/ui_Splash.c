@@ -12,12 +12,15 @@ void ui_Splash_screen_init(void)
     lv_obj_set_style_bg_color(ui_Splash, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Splash, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    lv_obj_set_style_bg_color(ui_Splash, lv_color_hex(0xFFFFFF), LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Splash, 255, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
+
     ui_Logo = lv_img_create(ui_Splash);
-    lv_img_set_src(ui_Logo, &ui_img_logo_png);
+    lv_img_set_src(ui_Logo, &ui_img_1386888695);
     lv_obj_set_width(ui_Logo, LV_SIZE_CONTENT);   /// 320
     lv_obj_set_height(ui_Logo, LV_SIZE_CONTENT);    /// 290
-    lv_obj_set_x(ui_Logo, 0);
-    lv_obj_set_y(ui_Logo, 1);
+    lv_obj_set_x(ui_Logo, -1);
+    lv_obj_set_y(ui_Logo, -26);
     lv_obj_set_align(ui_Logo, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Logo, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Logo, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
