@@ -1,1 +1,1 @@
-Uhr mit Wecker Funktion programmiert für Arduino.
+Uhr mit Weckerfunktion programmiert für Arduino.
