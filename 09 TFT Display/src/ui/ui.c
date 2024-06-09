@@ -5,6 +5,7 @@
 
 #include "ui.h"
 #include "ui_helpers.h"
+#include <Arduino.h>
 
 ///////////////////// VARIABLES ////////////////////
 void Appear_Animation(lv_obj_t * TargetObject, int delay);
@@ -30,6 +31,8 @@ lv_obj_t * ui_ColonTimeChoose;
 lv_obj_t * ui_MinChooseRoller;
 void ui_event_CheckMark(lv_event_t * e);
 lv_obj_t * ui_CheckMark;
+char timeClock[] = "00:00";
+bool timeIsSeted = false;
 
 
 // SCREEN: ui_TimeHumidity
@@ -136,6 +139,7 @@ void ui_event_CheckMark(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_RELEASED) {
         _ui_screen_change(&ui_TimeHumidity, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_TimeHumidity_screen_init);
+        timeIsSeted = true;
     }
 }
 void ui_event_TimeHumidity(lv_event_t * e)
@@ -175,28 +179,25 @@ void ui_init(void)
 
 
 //
-
-char timeClock[] = "00:00";
-
-const char* compileTime = __TIME__;
+uint16_t rollerHour = 0, rollerMinute = 0;
+unsigned long int millisOffset = 0;
 
 void updateTimeClockVariable()
 {
-  // Extract hour
-  int compilationTimeHours = (compileTime[0] - '0') * 10 + (compileTime[1] - '0');
+  
+  if(ui_HourChooseRoller != NULL && ui_MinChooseRoller != NULL && timeIsSeted == false)
+  {
+    rollerHour = lv_roller_get_selected(ui_HourChooseRoller);
+    rollerMinute = lv_roller_get_selected(ui_MinChooseRoller);
+    millisOffset = millis();
+  }
 
-  // Extract minute
-  int compilationTimeMinutes = (compileTime[3] - '0') * 10 + (compileTime[4] - '0');
+  //Wait until user sets the time. Needed to start from 0 seconds.
+  unsigned long int clockOffset = millis() - millisOffset;
 
-  // Extract seconds
-  int compilationTimeSeconds = (compileTime[6] - '0') * 10 + (compileTime[7] - '0');
-
-  //Seconds since midnight of compilation day
-  unsigned long secondsSinceCompilationDayMidnight = millis() / 1000 + compilationTimeMinutes * 60 + compilationTimeHours * 3600;
-
-  int minuteRaw = secondsSinceCompilationDayMidnight / 60;
-  int minute = minuteRaw % 60;
-  int hour = (minuteRaw / 60) % 24;
+  unsigned int minuteRaw = rollerMinute + (clockOffset / 1000) / 60;
+  uint16_t minute = minuteRaw % 60;
+  uint16_t hour = (rollerHour + minuteRaw / 60) % 24;
 
   //chars_written is the count of written chars
   int chars_written = snprintf(timeClock, sizeof(timeClock), "%02d:%02d", hour, minute);

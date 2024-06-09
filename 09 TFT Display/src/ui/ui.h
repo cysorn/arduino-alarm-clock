@@ -42,7 +42,7 @@ extern lv_obj_t * ui_TimeChoose;
 extern lv_obj_t * ui_HourChooseRoller;
 extern lv_obj_t * ui_ColonTimeChoose;
 extern lv_obj_t * ui_MinChooseRoller;
-
+extern bool timeIsSeted;
 extern char timeClock[];
 
 
