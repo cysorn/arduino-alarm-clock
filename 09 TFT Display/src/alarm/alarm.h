@@ -2,7 +2,7 @@
 
 class Alarm{
     public:
-        //Alarm();
+    
         void updateAlarmIfNecessary(unsigned short hourRollerValue, unsigned short minuteRollerValue, bool snooze, bool enabled);
 
         void checkIfAlarmSetAndUpdateIfNecessary();

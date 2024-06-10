@@ -44,6 +44,8 @@ extern lv_obj_t * ui_ColonTimeChoose;
 extern lv_obj_t * ui_MinChooseRoller;
 extern bool timeIsSeted;
 extern char timeClock[];
+extern uint16_t currentMinute;
+extern uint16_t currentHour;
 
 
 void ui_event_CheckMark(lv_event_t * e);

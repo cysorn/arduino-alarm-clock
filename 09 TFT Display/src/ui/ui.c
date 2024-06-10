@@ -179,7 +179,7 @@ void ui_init(void)
 
 
 //
-uint16_t rollerHour = 0, rollerMinute = 0;
+uint16_t rollerHour = 0, rollerMinute = 0, currentMinute = 0, currentHour = 0;
 unsigned long int millisOffset = 0;
 
 void updateTimeClockVariable()
@@ -196,11 +196,11 @@ void updateTimeClockVariable()
   unsigned long int clockOffset = millis() - millisOffset;
 
   unsigned int minuteRaw = rollerMinute + (clockOffset / 1000) / 60;
-  uint16_t minute = minuteRaw % 60;
-  uint16_t hour = (rollerHour + minuteRaw / 60) % 24;
+  currentMinute = minuteRaw % 60;
+  currentHour = (rollerHour + minuteRaw / 60) % 24;
 
   //chars_written is the count of written chars
-  int chars_written = snprintf(timeClock, sizeof(timeClock), "%02d:%02d", hour, minute);
+  int chars_written = snprintf(timeClock, sizeof(timeClock), "%02d:%02d", currentHour, currentMinute);
 
 }
 
@@ -213,22 +213,11 @@ void updateTime() {
 }
 
 bool isAlarmEnabled(){
-    lv_state_t switchState = lv_obj_get_state(ui_EnableAlarm);
-
-    if (switchState == LV_STATE_CHECKED) {
-        return true;
-    } else {
-        return false;
-    }
+    return lv_obj_has_state(ui_EnableAlarm, LV_STATE_CHECKED) ? true : false;
 }
 
 bool isSnoozeEnabled(){
-    lv_state_t snoozeState = lv_obj_get_state(ui_Snooze);// & LV_STATE_CHECKED;
-    if (snoozeState == LV_STATE_CHECKED) {
-        return true;
-    } else {
-        return false;
-    }
+    return lv_obj_has_state(ui_Snooze, LV_STATE_CHECKED) ? true : false;
 }
 
 unsigned short getAlarmRollerHour(){
