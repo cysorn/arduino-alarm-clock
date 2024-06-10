@@ -16,17 +16,39 @@ ActiveBuzzer::ActiveBuzzer(){
 }
 
 void ActiveBuzzer::playAlarm(Ultrasonic ult){
-  int size = sizeof(passive_buzzer_durations) / sizeof(int);
-
-  for (int note = 0; note < size; note++) {
-    digitalWrite(BUZZER, passive_buzzer_notes[note]);
-    delay(passive_buzzer_durations[note]);
-    digitalWrite(BUZZER, !passive_buzzer_notes[note]);
-
-    float tmp = ult.getDistanceInCmOnceInDelay(true);
-    if(tmp < 10 && tmp >= 0.01){
-      digitalWrite(BUZZER, LOW);
-      break;
-    }
-  }
+    digitalWrite(BUZZER, HIGH);
+    delay(400);
+    digitalWrite(BUZZER, LOW);
 }
+
+/*
+void ActiveBuzzer::playAlarm(Ultrasonic ult){
+  int size = sizeof(passive_buzzer_durations) / sizeof(int);
+  Serial.println("I'm in the function");
+  
+  // Declare and initialize tmp inside the function
+  float tmp = ult.getDistanceInCm();
+  Serial.print("tmp: ");
+  Serial.println(tmp);
+  
+  do{
+    Serial.println("I'm in while");
+    for (int note = 0; note < size; note++) {
+      Serial.println("I'm in for");
+      Serial.print("tmp:");
+      Serial.println(tmp);
+      digitalWrite(BUZZER, passive_buzzer_notes[note]);
+      delay(passive_buzzer_durations[note]);
+      digitalWrite(BUZZER, !passive_buzzer_notes[note]);
+
+      if(tmp < 10 && tmp >= 0.01){
+        digitalWrite(BUZZER, LOW);
+        break;
+      }
+      // Update tmp inside the loop for continuous reading
+      tmp = ult.getDistanceInCm();
+    }
+  }while(tmp < 10 && tmp >= 0.01);
+  Serial.println("I'm ready to exit the function.");
+}
+*/

@@ -21,15 +21,11 @@ void setup()
 
 void loop()
 {
-  float tmp = ult.getDistanceInCmOnceInDelay(true);
+  float tmp = ult.getDistanceInCm();
   //For some reason at the start returns 0.00
+  Serial.println(tmp);
   if(tmp < 10 && tmp >= 0.01){
-    /*
-    Serial.println("Im here!");
-    Serial.print(tmp);
-    Serial.print("<");
-    Serial.println(10);
-    */
+    Serial.print("Im here!");
     activeBuzzer.playAlarm(ult);
   }
   
