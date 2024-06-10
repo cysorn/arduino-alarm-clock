@@ -1,9 +1,8 @@
-#include "ultrasonic/ultrasonic.h"
 #include "sound/active_buzzer/active_buzzer.h"
 
 class Alarm{
     public:
-        Alarm();
+        //Alarm();
         void updateAlarmIfNecessary(unsigned short hourRollerValue, unsigned short minuteRollerValue, bool snooze, bool enabled);
 
         void checkIfAlarmSetAndUpdateIfNecessary();
