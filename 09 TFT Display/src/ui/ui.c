@@ -211,3 +211,30 @@ void updateTime() {
     lv_label_set_text(ui_Time, timeClock);
     lv_obj_invalidate(ui_Time);
 }
+
+bool isAlarmEnabled(){
+    lv_state_t switchState = lv_obj_get_state(ui_EnableAlarm);
+
+    if (switchState == LV_STATE_CHECKED) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool isSnoozeEnabled(){
+    lv_state_t snoozeState = lv_obj_get_state(ui_Snooze);// & LV_STATE_CHECKED;
+    if (snoozeState == LV_STATE_CHECKED) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+unsigned short getAlarmRollerHour(){
+    return lv_roller_get_selected(ui_HourRoller);
+}
+
+unsigned short getAlarmRollerMinute(){
+    return lv_roller_get_selected(ui_MinRoller);
+}

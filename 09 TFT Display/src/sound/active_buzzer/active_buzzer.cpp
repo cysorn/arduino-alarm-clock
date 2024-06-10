@@ -15,6 +15,11 @@ ActiveBuzzer::ActiveBuzzer(){
     pinMode(BUZZER, OUTPUT);
 }
 
+
+//WORKAROUND:
+//Add global increment. Increment it once here, Change the global delay
+//Let it go out and iterate loop with the delay and come back as long the hand is there
+//Once hand is not there anymore, put back the standard programm delay
 void ActiveBuzzer::playAlarm(Ultrasonic ult){
     digitalWrite(BUZZER, HIGH);
     delay(400);

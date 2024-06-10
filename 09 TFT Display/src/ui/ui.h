@@ -84,6 +84,11 @@ LV_FONT_DECLARE(ui_font_ClockDigits);
 
 void updateTime();
 
+bool isAlarmEnabled();
+bool isSnoozeEnabled();
+unsigned short getAlarmRollerHour();
+unsigned short getAlarmRollerMinute();
+
 void ui_init(void);
 
 #ifdef __cplusplus
