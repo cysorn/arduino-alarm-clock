@@ -1,6 +1,0 @@
-class Buzzer{
-    public:
-
-    private:
-        
-};

@@ -8,3 +8,11 @@ Ultrasonic/src/pins.h
 Ultrasonic/src/ultrasonic/ultrasonic.cpp
 Ultrasonic/src/ultrasonic/ultrasonic.h
 Ultrasonic/test/README
+Buzzer/.gitignore
+Buzzer/platformio.ini
+Buzzer/.vscode/extensions.json
+Buzzer/include/README
+Buzzer/lib/README
+Buzzer/src/main.cpp
+Buzzer/src/pins.h
+Buzzer/test/README

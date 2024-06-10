@@ -1,10 +1,6 @@
 #include "pins.h"
 
 #include <Arduino.h>
-/*
-#include "display.h"
-#include "ui/ui.h"
- */
 #include "ultrasonic.h"
 
 Ultrasonic::Ultrasonic(short distanceRequestFrequencyMs, short sleepDelay): distanceRequestFrequencyMs(distanceRequestFrequencyMs), sleepDelay(sleepDelay){
@@ -20,13 +16,15 @@ void Ultrasonic::trigger(){
 
 
 float Ultrasonic::getDistanceInCmOnceInDelay(bool verbose){
-    float distance = 0;
+    float distance = previousDistance;
     if(distanceRequestFrequencyMs <= sleepedTimeCounter){
         distance = getDistanceInCm();
+        previousDistance = distance; //next function call this will be the previous distance
         if(verbose)
         {
             Serial.print("The distance:");
             Serial.println(distance);
+            Serial.println();
         }
         sleepedTimeCounter = 0;
     }

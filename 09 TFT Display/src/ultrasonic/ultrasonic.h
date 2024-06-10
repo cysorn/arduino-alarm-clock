@@ -12,7 +12,8 @@ class Ultrasonic
 
         void trigger();
 
-        short distanceRequestFrequencyMs = 0;
+        int distanceRequestFrequencyMs = 0;
         int sleepedTimeCounter = 0;
         int sleepDelay = 0;
+        float previousDistance = 0;
 };
