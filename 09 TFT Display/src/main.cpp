@@ -15,6 +15,7 @@
 Ultrasonic ult(200, DELAY_TIME);
 ActiveBuzzer activeBuzzer;
 Alarm alarmm;
+RgbLED led;
 
 void setup()
 {
@@ -25,13 +26,13 @@ void setup()
   ui_init();
 }
 
-////int waiter = 1000;
+//int waiter = 1000;
 int waiterCounter = 0;
 void loop()
 {
   //if(waiterCounter >= waiter){
     if(isAlarmEnabled()){
-      alarmm.updateAlarmIfNecessary(getAlarmRollerHour(), getAlarmRollerMinute(), isSnoozeEnabled(), isAlarmEnabled());
+      alarmm.updateAlarmIfNecessary(getAlarmRollerHour(), getAlarmRollerMinute(), isSnoozeEnabled(), isAlarmEnabled(), currentHour, currentMinute);
       /*
       Serial.print("Roller hour:");
       Serial.println(getAlarmRollerHour());
@@ -42,8 +43,14 @@ void loop()
       Serial.print("Is alarm enabled:");
       Serial.println(isAlarmEnabled());
       */
-      alarmm.playAlarmIfTheTimeMatches(ult, activeBuzzer, currentHour, currentMinute);
-      alarmm.checkUserReactoinIfAlarmEnabled(ult, activeBuzzer);
+     /*
+      Serial.print(alarmm.delayWaited);
+      Serial.println();
+      Serial.println();
+      */
+      alarmm.playAlarmIfTheTimeMatches(ult, activeBuzzer, led);
+      //DELAY_TIME * 2 means that alarm sound will play 2 iterations before ultrasonic sensor will start
+      alarmm.checkUserReactoinIfAlarmEnabled(ult, activeBuzzer, DELAY_TIME * 2, DELAY_TIME);
     }
     //waiterCounter=0;
     //Serial.println("\n");

@@ -5,7 +5,7 @@ Alarm::Alarm(unsigned short hourRollerValue, unsigned short minuteRollerValue, b
 
 }*/
 
-void Alarm::updateAlarmIfNecessary(unsigned short hourRollerValue, unsigned short minuteRollerValue, bool snoozeCheckbox, bool enabledSwitch){
+void Alarm::updateAlarmIfNecessary(unsigned short hourRollerValue, unsigned short minuteRollerValue, bool snoozeCheckbox, bool enabledSwitch, unsigned short currentHour, unsigned short currentMinute){
     bool changed = false;
 
     if(alarmHour != hourRollerValue)
@@ -32,35 +32,53 @@ void Alarm::updateAlarmIfNecessary(unsigned short hourRollerValue, unsigned shor
     {
         gotUserReaction = false;
     }
+
+    clockHour = currentHour;
+    clockMinute = currentMinute;
 }
 
-void Alarm::checkUserReactoinIfAlarmEnabled(Ultrasonic ult, ActiveBuzzer activeBuzzer){
+void Alarm::checkUserReactoinIfAlarmEnabled(Ultrasonic ult, ActiveBuzzer activeBuzzer, int frequency, int dl){
 
-    if(enabled && gotUserReaction == false)
+
+    if(enabled && gotUserReaction == false && alarmTimeMatches())
     {
-        float tmp = ult.getDistanceInCm();
-        if(tmp < 20 && tmp >= 0.01){
-            gotUserReaction = true;
-            /*
-            if(snooze)
-            {
-                alarm
+        if(frequency <= delayWaited)
+        {
+            float tmp = ult.getDistanceInCm();
+            if(tmp < 20 && tmp >= 0.01){
+                gotUserReaction = true;
+                /*
+                if(snooze)
+                {
+                    alarm
+                }
+                */
             }
-            */
+            delayWaited = 0;
         }
+        delayWaited += dl;
     }
 }
 
 //Called for every beep
-void Alarm::playAlarmIfTheTimeMatches(Ultrasonic ult, ActiveBuzzer activeBuzzer, unsigned short currentHour, unsigned short currentMin){
-    if(alarmHour == currentHour && alarmMinute == currentMin)
+void Alarm::playAlarmIfTheTimeMatches(Ultrasonic ult, ActiveBuzzer activeBuzzer, RgbLED led){
+    if(alarmTimeMatches())
     {
         if(gotUserReaction != true)
         {
             activeBuzzer.playAlarm(ult);
+            led.shineColor(255, 0, 0);
         }
     }
     else{
         gotUserReaction = false;
     }
+
+    if(gotUserReaction){
+        led.shineColor(0, 0, 0);
+    }
+}
+
+bool Alarm::alarmTimeMatches(){
+    return alarmHour == clockHour && alarmMinute == clockMinute;
 }
