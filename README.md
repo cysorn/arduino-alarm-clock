@@ -6,8 +6,9 @@ Dieses Projekt ist mein Abschlussprojekt im Fachabitur – Technik. Es umfasst d
 - Uhrzeiteinstellung
 - Uhrzeitanzeige
 - Einstellbarer Wecker
-- Steuerung über einen Ultraschallsensor
+- Ausschalten mit Ultraschallsensor
 - Alarm mit Ton und LED
+- Kalibrierter Touchscreen
 
 ## Technologien (nur Code)
 
