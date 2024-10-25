@@ -10,7 +10,7 @@ Die Firmware bietet folgende Funktionen:
 - Alarm mit Ton und LED
 - Kalibrierter Touchscreen
 
-## Technologien (nur Code)
+## Technologien
 
 - PlatformIO: Build-Tool und Framework
 - Squareline Studio: GUI-Gestaltung
